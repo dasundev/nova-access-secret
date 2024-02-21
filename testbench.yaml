@@ -1,0 +1,19 @@
+providers:
+   - Workbench\App\Providers\NovaServiceProvider
+
+workbench:
+   start: /nova
+   guard: web
+   sync:
+      - from: ./public/
+        to: public/vendor/nova
+   build:
+     - asset-publish
+     - nova:install
+   assets:
+     - nova-assets
+   discovers:
+     web: true
+     api: false
+     commands: false
+     views: true

@@ -1,0 +1,77 @@
+{
+    "name": "dasundev/nova-access-secret",
+    "description": "Secure your Laravel Nova access with a required secret key in the URL.",
+    "keywords": [
+        "dasundev",
+        "laravel",
+        "nova",
+        "access",
+        "secret",
+        "login"
+    ],
+    "authors": [
+        {
+            "name": "Dasun Tharanga",
+            "email": "hello@dasun.dev"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dasundev\\NovaAccessSecret\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dasundev\\NovaAccessSecret\\Tests\\": "tests",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "pint": "vendor/bin/pint --dirty",
+        "analyse": "vendor/bin/phpstan analyse",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@dusk:install-chromedriver"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/pint",
+            "@php vendor/bin/phpstan analyse"
+        ],
+        "dusk:install-chromedriver": "@php vendor/bin/dusk-updater detect --auto-update --ansi"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "spatie/laravel-package-tools": "^1.10.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.0",
+        "laravel/pint": "^1.13",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.30.0",
+        "orchestra/testbench-dusk": "^8.12"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dasundev\\NovaAccessSecret\\NovaAccessSecretServiceProvider"
+            ]
+        }
+    }
+}
